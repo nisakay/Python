@@ -1,5 +1,8 @@
 import sqlite3
 
+fileList = ('information.docx','Hello.txt','myImage.png', \
+               'myMovie.mpg','World.txt','data.pdf','myPhoto.jpg')
+
 conn = sqlite3.connect('file.db')
 
 with conn:
@@ -8,18 +11,6 @@ with conn:
         ID INTEGER PRIMARY KEY AUTOINCREMENT, \
         File_Name TEXT \
         )")               
-    conn.commit()
-conn.close()
-
-conn = sqlite3.connect('file.db')
-
-with conn:
-    cur = conn.cursor()
-    cur.execute
-
-    fileList = ('information.docx','Hello.txt','myImage.png', \
-               'myMovie.mpg','World.txt','data.pdf','myPhoto.jpg')
-
     conn.commit()
 conn.close()
 
@@ -33,6 +24,8 @@ with conn:
         if i.endswith('.txt'):
             ("INSERT INTO tbl_persons(File_name) VALUES (?)")
             print(i)
+    conn.commit()
+conn.close()
 
         
                        
