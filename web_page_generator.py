@@ -3,13 +3,13 @@ import web_page_gui
 
 def addToBody(self):
     f = open("webPage_generator.html", "a")
-    f.write(""<html> 
+    f.write("""<html> 
                  <body> 
                     <h1>
                           Stay tuned for our amazing summer sale! 
                     </h1>
                  </body> 
-            </html> "")
+            </html> """)
     f.close()
 
     #open and read the file after the appending:
