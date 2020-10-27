@@ -41,47 +41,47 @@ class ParentWindow(Frame):
 
             self.moveFiles = Button(root, text ="Move File",command=lambda: MoveFile(self), width = 15)
             self.moveFiles.grid(row = 3, column = 2, pady = 5, padx = 5) 
-
-
+ 
 def GetFileList(path, type):
-    '''
-    Return a list of filename matching the given path and file type
-    '''
+
     return glob.glob(path + "*" + type)
 
 
 def setSourceDir(self):
 
-                root.source = os.path.normpath(askdirectory())
+                sourceText = os.path.normpath(askdirectory())
 
-                root.sourceText.insert('1', root.source)
+                root.sourceText.insert('1', sourceText)
 
 def setDestDir(self):
     
-                root.destination = os.path.normpath(askdirectory())
+                destinationText = os.path.normpath(askdirectory())
 
-                root.destinationText.insert('1', root.destination)
+                root.destinationText.insert('1', destinationText)
 
 def MoveFile(self):
-
-    fileType = ".txt"
-
-    # Create list of text filenames in Origin folder
-    fileList = GetFileList(root.source, fileType)
-
-    for file in fileList:
-        # Get last modified date and today's date
-        modifyDate = datetime.datetime.fromtimestamp(os.path.getmtime(file))
-        todaysDate = datetime.datetime.today()
         
-        # If modified within last 24 hours, then copy to destination folder
-        modifyDateLimit = modifyDate + datetime.timedelta(days=1)
+        sourceDir = root.sourceText.get()
+        destDir = root.destinationText.get()
 
-        # If the file was edited less then 24 hours ago then copy it
-        if modifyDateLimit > todaysDate:
-             shutil.copy2(file, setDestDir + filename)
 
-    messagebox.showinfo("SUCCESSFULL") 
+        # Create list of text filenames in Origin folder
+        fileList = os.listdir(sourceDir)
+
+        for file in fileList:
+                # Get last modified date and today's date
+                full_path = os.path.join(sourceDir, file)
+                modifyDate = datetime.datetime.fromtimestamp(os.path.getmtime(full_path))
+                todaysDate = datetime.datetime.now()
+                
+                # If modified within last 24 hours, then copy to destination folder
+                modifyDateLimit = todaysDate - datetime.timedelta(days=1)
+
+                # If the file was edited less then 24 hours ago then copy it
+                if modifyDateLimit <= modifyDate:
+                     shutil.copy2(full_path, destDir)
+
+        messagebox.showinfo("SUCCESSFULL") 
 
 
 
