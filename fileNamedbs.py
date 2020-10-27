@@ -10,22 +10,26 @@ with conn:
     cur.execute("CREATE TABLE IF NOT EXISTS tbl_file( \
         ID INTEGER PRIMARY KEY AUTOINCREMENT, \
         File_Name TEXT \
-        )")               
+        )")
     conn.commit()
 conn.close()
 
-conn = sqlite3.connect('test.db')
-
+conn = sqlite3.connect('file.db')
 with conn:
     cur = conn.cursor()
     cur.execute
-
     for i in fileList:
         if i.endswith('.txt'):
-            ("INSERT INTO tbl_persons(File_name) VALUES (?)")
-            print(i)
+           print(i) 
+
+    cur.execute("INSERT INTO tbl_file(File_Name) VALUES (?)", (i,))
+
     conn.commit()
 conn.close()
+
+
+
+
 
         
                        
