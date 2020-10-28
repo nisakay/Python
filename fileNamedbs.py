@@ -20,9 +20,10 @@ with conn:
     cur.execute
     for i in fileList:
         if i.endswith('.txt'):
-           print(i) 
+            cur.execute("INSERT INTO tbl_file(File_Name) VALUES (?)", (i,))
+            print(i) 
 
-    cur.execute("INSERT INTO tbl_file(File_Name) VALUES (?)", (i,))
+    
 
     conn.commit()
 conn.close()
